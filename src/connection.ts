@@ -2,8 +2,8 @@ import {DataSource, DataSourceOptions} from 'typeorm';
 import "reflect-metadata";
 import dotenv from 'dotenv';
 
-import { User } from './models/user.model';
-import { Perfil } from './models/perfil.model';
+import User from './models/user.model';
+import Perfil from './models/perfil.model';
 
 dotenv.config();
 

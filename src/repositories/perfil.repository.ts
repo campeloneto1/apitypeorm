@@ -1,5 +1,5 @@
 import { AppDataSource } from "../connection";
-import { Perfil } from "../models/perfil.model";
+import Perfil from "../models/perfil.model";
 
 const perfilRepository = AppDataSource.getRepository(Perfil)
 

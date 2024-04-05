@@ -1,8 +1,9 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
-import { Perfil } from "./perfil.model";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, BeforeInsert, BeforeUpdate } from "typeorm";
+import Perfil from "./perfil.model";
+import Bcrypt from '../utilities/bcrypt';
 
 @Entity("users")
-export class User{
+export default class User{
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -34,4 +35,9 @@ export class User{
 
     @ManyToOne(() => Perfil, (perfil) => perfil.users)
     perfil!: Perfil
+
+    @BeforeInsert()
+    async hashPassword() {
+        this.password = await Bcrypt.hashString(this.cpf);
+    }
 }

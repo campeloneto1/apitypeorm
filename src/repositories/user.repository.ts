@@ -1,23 +1,20 @@
 import { AppDataSource } from "../connection";
-import { User } from "../models/user.model";
+import User from "../models/user.model";
 
 const userRepository = AppDataSource.getRepository(User)
 
 async function index()  {
-    const response = await userRepository.find({
-        relations: ['perfil'],
-    });
+    const response = await userRepository.find({relations: ['perfil']});
     return response;
 }
 
 async function find(id: number){
-    const response = await userRepository.findOne({where: {id: id}, relations: ['perfil'],});
+    const response = await userRepository.findOne({where: {id: id}, relations: ['perfil']});
     return response;
 }
 
 async function create(data:any){
-    var user = new User();
-    user = {...data};
+    var user = userRepository.create({...data})    
     const response = await userRepository.save(user)
     return response;
 }
